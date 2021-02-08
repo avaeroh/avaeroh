@@ -1,5 +1,5 @@
 import React, { useState, Component } from 'react';
-import logo from './logo.svg';
+import logo from './images/flashbang.png';
 import './App.css';
 const status = require('minecraft-server-status');
 
@@ -30,7 +30,7 @@ this.setState({
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Avaeroh's Webapp</h2>
+          <h2>Avaeroh's server status</h2>
         <p className="App-intro">
         <button onClick={this.getStatus}>Get/refresh server details</button>
        {this.state.onlineStatus}  
