@@ -4,24 +4,26 @@ import './App.css';
 const status = require('minecraft-server-status');
 
 class App extends Component {
- constructor(props) {
-  super(props);
-  this.state = {
-   onlineStatus: ""
-  };
- }
+  constructor(props) {
+    super(props);
+    this.state = {
+      onlineStatus: ""
+    };
+  }
 
-getStatus = () =>  {status('avaeroh.hopto.org', 25565, response => {
-console.log(response)
-var state=response.online
-var playerCount=JSON.stringify(response.players)
-if (state==true) {
-this.setState({
- onlineStatus: "The server is online with " + playerCount + " currently playing!"
-})
+  getStatus = () => {
+    status('avaeroh.hopto.org', 25565, response => {
+      console.log(response)
+      var state = response.online
+      var playerCount = JSON.stringify(response.players)
+      if (state == true) {
+        this.setState({
+          onlineStatus: "The server is online with " + playerCount + " currently playing!"
+        })
 
-}
-})}
+      }
+    })
+  }
 
 
 
@@ -31,11 +33,11 @@ this.setState({
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Avaeroh's server status</h2>
-        <p className="App-intro">
-        <button onClick={this.getStatus}>Get/refresh server details</button>
-       {this.state.onlineStatus}  
-      </p>
-       </div>
+          <p className="App-intro">
+            <button onClick={this.getStatus}>Get/refresh server details</button>
+            {this.state.onlineStatus}
+          </p>
+        </div>
       </div>
     );
   }
