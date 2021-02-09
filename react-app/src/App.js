@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { Component } from 'react';
 import logo from './images/flashbang.png';
 import './App.css';
 const status = require('minecraft-server-status');
@@ -15,17 +15,18 @@ class App extends Component {
     status('avaeroh.hopto.org', 25565, response => {
       console.log(response)
       var state = response.online
-      var playerCount = JSON.stringify(response.players)
+      var playerCount = JSON.stringify(response.players.now)
       if (state == true) {
         this.setState({
-          onlineStatus: "The server is online with " + playerCount + " currently playing!"
+          onlineStatus: "The server is online with " + playerCount + " players currently playing!"
         })
-
+      } else {
+        this.setState({
+          onlineStatus: "The server is offline."
+        })
       }
     })
   }
-
-
 
   render() {
     return (
@@ -35,9 +36,10 @@ class App extends Component {
           <h2>Avaeroh's server status</h2>
           <p className="App-intro">
             <button onClick={this.getStatus}>Get/refresh server details</button>
-            {this.state.onlineStatus}
+            
           </p>
         </div>
+        <div className="body">{this.state.onlineStatus}</div>
       </div>
     );
   }
